@@ -14,6 +14,22 @@ class UsersEditTest < ActionDispatch::IntegrationTest
                                          password:             "asdf",
                                          password_confirmation:"zxcv"} }
     assert_template 'users/edit'
-    assert_select 'div.alert', "The form contains 4 errors"
+    assert_select 'div.alert', text: "The form contains 4 errors"
+  end
+  
+  test "successful edit" do
+    get edit_user_path(@user)
+    assert_template 'users/edit'
+    name  = "Foo Bar"
+    email = "foo@bar.com"
+    patch user_path(@user), params: { user: { name:  name,
+                                              email: email,
+                                              password: "password",
+                                              password_confirmation: "password" } }
+    assert_not flash.empty?
+    assert_redirected_to @user
+    @user.reload
+    assert_equal name,  @user.name
+    assert_equal email, @user.email
   end
 end
