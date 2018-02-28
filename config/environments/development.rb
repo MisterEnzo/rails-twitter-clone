@@ -26,8 +26,13 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # Checks if the app will raise errors on mail delivery failure
+  config.action_mailer.raise_delivery_errors = true
+
+  # Configurations for mail preview
+  config.action_mailer.delivery_method = :test
+  host = 'learn-enough-rails-tutorial-enriquelorenzo.c9users.io'
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 
   config.action_mailer.perform_caching = false
 
