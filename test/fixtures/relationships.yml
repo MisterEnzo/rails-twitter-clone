@@ -1,0 +1,15 @@
+one:
+  follower: test_user
+  followed: lana
+
+two:
+  follower: test_user
+  followed: malory
+
+three:
+  follower: lana
+  followed: test_user
+
+four:
+  follower: archer
+  followed: test_user
